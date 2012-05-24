@@ -2,47 +2,51 @@ package ca.eloas.hamcrest.methodinvocation;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.hamcrest.Description;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.lang.reflect.Method;
 
 /**
  * @author JP
  */
 public class MethodInvocationMatcher {
     
-    public static Matcher methodName(final Matcher<String> m) {
-        
-        return new TypeSafeMatcher<MethodInvocation>() {
+    
+    public static Matcher<MethodInvocation> method(final Matcher<Method> matcher) {
 
-            public void describeTo(Description description) {
-
-                description.appendText("method name " );
-                description.appendDescriptionOf(m);
-            }
+        return new FeatureMatcher<MethodInvocation, Method>(matcher, "an invocation with method ", "method") {
 
             @Override
-            protected boolean matchesSafely(MethodInvocation item) {
-
-                return m.matches(item.getMethod().getName());
+            protected Method featureValueOf(MethodInvocation actual) {
+                return actual.getMethod();
             }
+
         };
     }
 
-    public static Matcher methodClass(final Matcher<Class> m) {
+    public static  <T> Matcher<MethodInvocation> thisObject(final Matcher<? super T> matcher) {
 
-        return new TypeSafeMatcher<MethodInvocation>() {
-
-            public void describeTo(Description description) {
-
-                description.appendText("method class " );
-                description.appendDescriptionOf(m);
-            }
+        return new FeatureMatcher<MethodInvocation, T>(matcher, "an invocation with method ", "this") {
 
             @Override
-            protected boolean matchesSafely(MethodInvocation item) {
-
-                return m.matches(item.getMethod().getDeclaringClass());
+            protected T featureValueOf(MethodInvocation actual) {
+                return (T) actual.getThis();
             }
+
+        };
+    }
+
+    public static Matcher<MethodInvocation> arguments(final Matcher matcher) {
+
+        return new FeatureMatcher<MethodInvocation, Object>(matcher, "an invocation with method ", "arguments") {
+
+            @Override
+            protected Object featureValueOf(MethodInvocation actual) {
+                return actual.getThis();
+            }
+
         };
     }
 

@@ -11,7 +11,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.methodName;
+import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.method;
+import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.thisObject;
+import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,7 +28,7 @@ public class MethodInvocationMatcherTest {
     }
     
     @Test
-    public void justForFun() throws Exception {
+    public void methodtest() throws Exception {
         
         Mockery m = new Mockery();
         final MethodInvocation mi = m.mock(MethodInvocation.class);
@@ -38,12 +40,28 @@ public class MethodInvocationMatcherTest {
            
         });
         
-        Matcher match = methodName(is("methodOne"));
-        System.err.println(match);
-        match.matches(mi);
+        assertThat(mi,  method(name(is("methodOne"))));
         m.assertIsSatisfied();
     }
-    
+
+    @Test
+    public void thistarget() throws Exception {
+
+        Mockery m = new Mockery();
+        final MethodInvocation mi = m.mock(MethodInvocation.class);
+        final String target = "foo";
+
+        m.checking(new Expectations() {
+
+            {
+                one(mi).getThis(); will(returnValue(target));
+            }
+
+        });
+
+        assertThat(mi,  thisObject(is("foo")));
+        m.assertIsSatisfied();
+    }
     
 
     
