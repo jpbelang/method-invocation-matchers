@@ -38,13 +38,13 @@ public class MethodInvocationMatcher {
         };
     }
 
-    public static Matcher<MethodInvocation> arguments(final Matcher matcher) {
+    public static <T> Matcher<MethodInvocation> arguments(final Matcher<? super T[]> matcher) {
 
-        return new FeatureMatcher<MethodInvocation, Object>(matcher, "an invocation with method ", "arguments") {
+        return new FeatureMatcher<MethodInvocation, T[]>(matcher, "an invocation with method ", "arguments") {
 
             @Override
-            protected Object featureValueOf(MethodInvocation actual) {
-                return actual.getThis();
+            protected T[] featureValueOf(MethodInvocation actual) {
+                return (T[]) actual.getArguments();
             }
 
         };

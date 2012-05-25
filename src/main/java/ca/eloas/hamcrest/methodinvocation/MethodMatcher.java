@@ -2,6 +2,7 @@ package ca.eloas.hamcrest.methodinvocation;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.hamcrest.Description;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -14,16 +15,11 @@ public class MethodMatcher {
 
     public static Matcher<Method> name(final Matcher<String> matcher) {
 
-        return new TypeSafeMatcher<Method>() {
-            public void describeTo(Description description) {
-
-                description.appendText("name ");
-                description.appendDescriptionOf(matcher);
-            }
+        return new FeatureMatcher<Method, String>(matcher, "method", "name") {
 
             @Override
-            protected boolean matchesSafely(Method item) {
-                return matcher.matches(item.getName());
+            protected String featureValueOf(Method actual) {
+                return actual.getName();
             }
         };
     }
