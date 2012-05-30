@@ -1,21 +1,14 @@
-package ca.eloas.hamcrest.methodinvocation;
+package ca.eloas.hamcrest.methodinvocation.matchers;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.collection.IsArray;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
-import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.arguments;
-import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.method;
-import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.thisObject;
-import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodInvocationMatcher.arguments;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodInvocationMatcher.method;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodInvocationMatcher.thisObject;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodMatcher.name;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.array;

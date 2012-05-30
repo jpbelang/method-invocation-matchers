@@ -1,12 +1,13 @@
-package ca.eloas.hamcrest.methodinvocation;
+package ca.eloas.hamcrest.methodinvocation.evaluation;
 
+import ca.eloas.hamcrest.methodinvocation.utils.JavaInvocationHandlerBridge;
 import org.aopalliance.intercept.MethodInvocation;
 
 import java.lang.reflect.Proxy;
 
-import static ca.eloas.hamcrest.methodinvocation.MethodInvocationMatcher.method;
-import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
-import static ca.eloas.hamcrest.methodinvocation.OnCall.onCall;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodInvocationMatcher.method;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodMatcher.name;
+import static ca.eloas.hamcrest.methodinvocation.evaluation.OnCall.onCall;
 import static org.hamcrest.Matchers.is;
 
 /**

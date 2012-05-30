@@ -1,4 +1,4 @@
-package ca.eloas.hamcrest.methodinvocation;
+package ca.eloas.hamcrest.methodinvocation.utils;
 
 import org.aopalliance.intercept.MethodInvocation;
 

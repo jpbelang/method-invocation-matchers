@@ -1,13 +1,10 @@
-package ca.eloas.hamcrest.methodinvocation;
+package ca.eloas.hamcrest.methodinvocation.matchers;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
-
-import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.declaredArguments;
-import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
-import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.returnType;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodMatcher.declaredArguments;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodMatcher.name;
+import static ca.eloas.hamcrest.methodinvocation.matchers.MethodMatcher.returnType;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
