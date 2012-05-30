@@ -44,7 +44,6 @@ public class MethodMatcherTest {
     public void test_return_value() throws NoSuchMethodException {
 
         assertTrue(returnType(equalTo(void.class)).matches(TestInterface.class.getMethod("aMethod")));
-        assertTrue(returnType(equalTo(String.class)).matches(TestInterface.class.getMethod("aMethod")));
     }
 
 }
