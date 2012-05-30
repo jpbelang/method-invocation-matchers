@@ -40,18 +40,14 @@ public class MethodMatcher {
         };
     }
 
-    public static Matcher<Method> declaredArguments(final Matcher matcher) {
 
-        return new TypeSafeMatcher<Method>() {
-            public void describeTo(Description description) {
+    public static  <T> Matcher<Method> declaredArguments(final Matcher<? super T[]> matcher) {
 
-                description.appendText("declared arguments ");
-                description.appendDescriptionOf(matcher);
-            }
+        return new FeatureMatcher<Method, T[]>(matcher, "a matching", "parameter types") {
 
             @Override
-            protected boolean matchesSafely(Method item) {
-                return matcher.matches(item.getParameterTypes());
+            protected T[] featureValueOf(Method item) {
+                return (T[]) item.getParameterTypes();
             }
         };
     }
@@ -71,6 +67,4 @@ public class MethodMatcher {
             }
         };
     }
-
-
 }

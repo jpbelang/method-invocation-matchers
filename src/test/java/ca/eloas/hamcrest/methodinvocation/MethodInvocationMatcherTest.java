@@ -77,7 +77,6 @@ public class MethodInvocationMatcherTest {
 
             {
                 one(mi).getArguments(); will(returnValue(target));
-  //              one(mi).getArguments(); will(returnValue(target));
 
             }
 
