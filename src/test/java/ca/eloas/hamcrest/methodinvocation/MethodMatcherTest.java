@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.declaredArguments;
 import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
+import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.returnType;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -32,6 +33,12 @@ public class MethodMatcherTest {
         assertThat(TestInterface.class.getMethod("aMethod"), declaredArguments(emptyArray()));
         assertThat(TestInterface.class.getMethod("aMethod", String.class), declaredArguments(arrayWithSize(1)));
         assertThat(TestInterface.class.getMethod("aMethod", String.class), declaredArguments(array(equalTo(String.class))));
+    }
+
+    @Test
+    public void test_return_value() throws NoSuchMethodException {
+
+        assertThat(TestInterface.class.getMethod("aMethod"), returnType(equalTo(void.class)));
     }
 
 }
