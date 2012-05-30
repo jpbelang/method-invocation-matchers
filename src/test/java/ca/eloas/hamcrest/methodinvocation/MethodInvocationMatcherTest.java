@@ -19,6 +19,7 @@ import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.array;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author JP
@@ -43,7 +44,7 @@ public class MethodInvocationMatcherTest {
            
         });
         
-        assertThat(mi,  method(name(is("methodOne"))));
+        assertTrue(method(name(is("methodOne"))).matches(mi));
         m.assertIsSatisfied();
     }
 
@@ -62,7 +63,7 @@ public class MethodInvocationMatcherTest {
 
         });
 
-        assertThat(mi,  thisObject(is("foo")));
+        assertTrue(thisObject(is("foo")).matches(mi));
         m.assertIsSatisfied();
     }
 
@@ -82,7 +83,7 @@ public class MethodInvocationMatcherTest {
 
         });
 
-        assertThat(mi,  arguments(array(is("foo"), is("bar"))));
+        assertTrue(arguments(array(is("foo"), is("bar"))).matches(mi));
         m.assertIsSatisfied();
     }
 

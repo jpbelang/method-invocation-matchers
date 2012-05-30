@@ -3,11 +3,14 @@ package ca.eloas.hamcrest.methodinvocation;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.declaredArguments;
 import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.name;
 import static ca.eloas.hamcrest.methodinvocation.MethodMatcher.returnType;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author JP
@@ -30,16 +33,18 @@ public class MethodMatcherTest {
     @Test
     public void test_argument() throws NoSuchMethodException {
 
-        assertThat(TestInterface.class.getMethod("aMethod"), declaredArguments(emptyArray()));
-        assertThat(TestInterface.class.getMethod("aMethod", String.class), declaredArguments(arrayWithSize(1)));
-        assertThat(TestInterface.class.getMethod("aMethod", String.class), declaredArguments(array(equalTo(String.class))));
+        assertTrue(declaredArguments(emptyArray()).matches(TestInterface.class.getMethod("aMethod")));
+        assertTrue(declaredArguments(arrayWithSize(1)).matches(TestInterface.class.getMethod("aMethod", String.class)));
+        assertTrue(declaredArguments(array(equalTo(String.class))).matches(TestInterface.class.getMethod("aMethod", String.class)));
     }
+
+
 
     @Test
     public void test_return_value() throws NoSuchMethodException {
 
-        assertThat(TestInterface.class.getMethod("aMethod"), returnType(equalTo(void.class)));
-        assertThat(TestInterface.class.getMethod("aMethod"), returnType(equalTo(String.class)));
+        assertTrue(returnType(equalTo(void.class)).matches(TestInterface.class.getMethod("aMethod")));
+        assertTrue(returnType(equalTo(String.class)).matches(TestInterface.class.getMethod("aMethod")));
     }
 
 }
