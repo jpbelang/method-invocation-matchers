@@ -20,7 +20,7 @@ public class Verifications {
         return ce;
     }
 
-    public Object checkAllAndFail(MethodInvocation mi) {
+    public Object checkAllAndFail(MethodInvocation mi) throws Throwable {
 
         for (CallEvaluation evaluation : evaluations) {
 
@@ -31,5 +31,17 @@ public class Verifications {
         }
 
         throw new IllegalStateException("couldn't match a rule!");
+    }
+
+    public Object checkAllAndProceed(MethodInvocation mi) throws Throwable {
+
+        for (CallEvaluation evaluation : evaluations) {
+
+            if (evaluation.matches(mi) ) {
+
+                return evaluation.operate(mi);
+            }
+        }
+        return mi.proceed();
     }
 }

@@ -41,7 +41,7 @@ public class SyntaxExample {
                         });
 
                     }
-                }).check(invocation);
+                }).checkAllAndFail(invocation);
             }
         });
 

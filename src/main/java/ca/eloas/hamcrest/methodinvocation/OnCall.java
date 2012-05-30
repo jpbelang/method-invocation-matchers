@@ -19,8 +19,14 @@ public class OnCall {
         return new OnCall(v);
     }
 
-    public Object check(MethodInvocation mi) {
+    public Object checkAllAndFail(MethodInvocation mi) {
 
         return verifications.checkAllAndFail(mi);
     }
+
+    public Object checkAllAndProceed(MethodInvocation mi) {
+
+        return verifications.checkAllAndProceed(mi);
+    }
+
 }
