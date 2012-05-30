@@ -24,18 +24,13 @@ public class MethodMatcher {
         };
     }
 
-    public static Matcher<Method> declaringClass(final Matcher<Class> matcher) {
+    public static <T> Matcher<Method> declaringClass(final Matcher<Class<T>> matcher) {
 
-        return new TypeSafeMatcher<Method>() {
-            public void describeTo(Description description) {
-
-                description.appendText("declaring class ");
-                description.appendDescriptionOf(matcher);
-            }
+        return new FeatureMatcher<Method, Class<T>>(matcher, "a declaring class of ", "declaring class") {
 
             @Override
-            protected boolean matchesSafely(Method item) {
-                return matcher.matches(item.getDeclaringClass());
+            protected Class<T> featureValueOf(Method item) {
+                return (Class<T>) item.getDeclaringClass();
             }
         };
     }
@@ -43,7 +38,7 @@ public class MethodMatcher {
 
     public static <T> Matcher<Method> declaredArguments(final Matcher<? super T[]> matcher) {
 
-        return new FeatureMatcher<Method, T[]>(matcher, "a matching", "parameter types") {
+        return new FeatureMatcher<Method, T[]>(matcher, "declared arguments", "parameter types") {
 
             @Override
             protected T[] featureValueOf(Method item) {
@@ -54,7 +49,7 @@ public class MethodMatcher {
 
     public static <T> Matcher<Method> returnType(final Matcher<Class<T>> matcher) {
 
-        return new FeatureMatcher<Method, Class<T>>(matcher, "a matching", "return type") {
+        return new FeatureMatcher<Method, Class<T>>(matcher, "a return type of ", "return type") {
 
             @Override
             protected Class<T> featureValueOf(Method item) {

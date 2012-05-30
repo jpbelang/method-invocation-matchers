@@ -39,6 +39,7 @@ public class MethodMatcherTest {
     public void test_return_value() throws NoSuchMethodException {
 
         assertThat(TestInterface.class.getMethod("aMethod"), returnType(equalTo(void.class)));
+        assertThat(TestInterface.class.getMethod("aMethod"), returnType(equalTo(String.class)));
     }
 
 }
